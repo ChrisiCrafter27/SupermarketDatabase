@@ -11,8 +11,8 @@ public class MyQueryResult {
         this.queryResult = queryResult;
     }
 
-    public boolean asFailed() {
-        return error != null;
+    public boolean succeeded() {
+        return error == null;
     }
 
     public String gerError() {

@@ -2,12 +2,14 @@ package supermarketdatabase.sql;
 
 import supermarketdatabase.sql.lib.DatabaseConnector;
 
+import java.nio.file.Path;
+
 public class MyDatabaseConnector {
     private final DatabaseConnector connector;
-    private final String path;
+    private final Path path;
 
-    public MyDatabaseConnector(String path) {
-        this.connector = new DatabaseConnector(null, -1, path, null, null);
+    public MyDatabaseConnector(Path path) {
+        this.connector = new DatabaseConnector(null, -1, path.toString(), null, null);
         this.path = path;
     }
 
@@ -16,7 +18,7 @@ public class MyDatabaseConnector {
         return new MyQueryResult(connector.getErrorMessage(), connector.getCurrentQueryResult());
     }
 
-    public String getPath() {
+    public Path getPath() {
         return path;
     }
 }

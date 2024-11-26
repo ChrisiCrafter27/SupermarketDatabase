@@ -1,14 +1,12 @@
 package supermarketdatabase;
 
-import supermarketdatabase.screen.MainFrame;
+import supermarketdatabase.screen.MyFrame;
 import supermarketdatabase.sql.lib.DatabaseConnector;
 import supermarketdatabase.sql.lib.QueryResult;
 
-import javax.swing.*;
-
 public class Main {
     public static void main(String[] args) {
-        new MainFrame();
+        new MyFrame();
     }
 
     public static void run(String dbPath){

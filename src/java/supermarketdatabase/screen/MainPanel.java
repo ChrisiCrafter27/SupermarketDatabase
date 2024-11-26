@@ -12,7 +12,7 @@ import java.io.File;
 import java.util.function.Consumer;
 
 public class MainPanel extends JPanel {
-    public MainPanel(Consumer<MyDatabaseConnector> newPath, Consumer<LoginMode> login) {
+    public MainPanel(MyDatabaseConnector connector, Consumer<MyDatabaseConnector> newPath, Consumer<LoginMode> login) {
         JButton openButton = new JButton("Datenbank öffnen");
         JLabel infoLabel0 = new JLabel("- keine Datei geöffnet -", SwingConstants.CENTER);
         JLabel infoLabel1 = new JLabel("", SwingConstants.CENTER);
@@ -27,24 +27,28 @@ public class MainPanel extends JPanel {
                 File file = fileChooser.getSelectedFile();
                 if(file.exists() && file.getName().endsWith(".db")) {
                     try {
-                        newPath.accept(new MyDatabaseConnector(file.getAbsolutePath()));
+                        newPath.accept(new MyDatabaseConnector(file.toPath()));
+                        loginButton0.setEnabled(true);
+                        loginButton1.setEnabled(true);
+                        infoLabel0.setText(file.getPath());
+                        infoLabel1.setText("(" + file.getName() + ")");
                     } catch (Exception e) {
                         JOptionPane.showMessageDialog(this, "Datenbank konnte nicht geöffnet werden:\n" + Util.exceptionString(e), "Fehler", JOptionPane.ERROR_MESSAGE);
                     }
                 }
-                infoLabel0.setText(file.getPath());
-                infoLabel1.setText("(" + file.getName() + ")");
             }
         });
         loginButton0.addActionListener(actionEvent -> login.accept(LoginMode.Grosskunde));
         loginButton1.addActionListener(actionEvent -> login.accept(LoginMode.Mitarbeiter));
+        loginButton0.setEnabled(connector != null);
+        loginButton1.setEnabled(connector != null);
+        infoLabel0.setText(connector != null ? connector.getPath().toAbsolutePath().toString() : "- keine Datei geöffnet -");
+        infoLabel1.setText(connector != null ? connector.getPath().getFileName().toString() : "");
 
         JPanel northPanel = new JPanel();
         northPanel.setLayout(new GridLayout(0, 1, 10, 10));
         northPanel.add(openButton);
         JPanel infoPanel = new JPanel();
-        infoLabel0.setVerticalAlignment(SwingConstants.CENTER);
-        infoLabel1.setVerticalAlignment(SwingConstants.CENTER);
         infoPanel.setLayout(new GridLayout(0, 1));
         infoPanel.add(infoLabel0);
         infoPanel.add(infoLabel1);
