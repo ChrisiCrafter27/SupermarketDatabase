@@ -1,0 +1,23 @@
+CREATE TRIGGER CalculateTotalPrice AFTER INSERT ON bestellt
+	BEGIN
+		UPDATE bestellt SET Gesamtpreis = (
+			SELECT Preis * NEW.Menge FROM Ware WHERE Ware."Waren-ID" = NEW."Waren-ID"
+		) WHERE bestellt."Bestell-ID" = NEW."Bestell-ID";
+	END;
+
+CREATE TRIGGER AddOrderValue AFTER INSERT ON bestellt
+	BEGIN
+		UPDATE Großkunde SET Gesamtausgaben = Gesamtausgaben + (
+			SELECT Preis * NEW.Menge FROM Ware WHERE Ware."Waren-ID" = NEW."Waren-ID"
+		) WHERE Großkunde."Kunden-ID" = NEW."Kunden-ID";
+	END;
+
+CREATE TRIGGER RecalculateStock1 BEFORE INSERT ON bestellt
+	BEGIN
+		UPDATE Ware SET Bestand = Bestand - NEW.Menge WHERE Ware."Waren-ID" = NEW."Waren-ID";
+	END;
+
+CREATE TRIGGER RecalculateStock2 BEFORE INSERT ON "enthält"
+	BEGIN
+		UPDATE Ware SET Bestand = Bestand - NEW.Menge WHERE Ware."Waren-ID" = NEW."Waren-ID";
+	END;
