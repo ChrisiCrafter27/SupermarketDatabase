@@ -20,7 +20,16 @@ public class Statements {
     }
 
     public static Statement<Optional<Name>> findName(int id, LoginMode mode) {
-        return null;
+        return switch (mode) {
+            case Grosskunde -> new Statement<>(String.format("""
+                SELECT Name
+                FROM "Großkunde"
+                WHERE "Kunden-ID" = %s;""", id), result -> result.getRows().length == 1 && result.getRows()[0].length == 1 ? Optional.of(new Name(result.getRows()[0][0])) : Optional.empty());
+            case Mitarbeiter, Admin -> new Statement<>(String.format("""
+                SELECT Vorname, Nachname
+                FROM Mitarbeiter
+                WHERE "Mitarbeiter-ID" = %s;""", id), result -> result.getRows().length == 1 && result.getRows()[0].length == 2 ? Optional.of(new Name(result.getRows()[0][0], result.getRows()[0][1])) : Optional.empty());
+        };
     }
 
     public static Statement<Boolean> checkPassword(int id, String password, LoginMode mode) {
