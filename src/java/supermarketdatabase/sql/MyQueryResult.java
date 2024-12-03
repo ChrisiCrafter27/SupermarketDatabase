@@ -20,18 +20,18 @@ public class MyQueryResult {
     }
 
     public int rows() {
-        return queryResult.getRowCount();
+        return queryResult != null ? queryResult.getRowCount() : 0;
     }
 
     public int columns() {
-        return queryResult.getColumnCount();
+        return queryResult != null ? queryResult.getColumnCount() : 0;
     }
 
     public String[] getTitles() {
-        return queryResult.getColumnNames();
+        return queryResult != null ? queryResult.getColumnNames() : new String[]{};
     }
 
     public String[][] getRows() {
-        return queryResult.getData();
+        return queryResult != null ? queryResult.getData() : new String[][]{};
     }
 }

@@ -51,7 +51,7 @@ public class LoginPanel extends DatabasePanel {
         };
         ActionListener login = actionEvent -> {
             if(execute(Statements.checkPassword((int) idSpinner.getValue(), String.valueOf(passwordField.getPassword()), mode))) {
-                done.accept(mode == LoginMode.Mitarbeiter && ((int) idSpinner.getValue()) == 1 ? LoginMode.Admin : mode, (int) idSpinner.getValue());
+                done.accept(mode, (int) idSpinner.getValue());
             } else {
                 JOptionPane.showMessageDialog(this, "ID und Passwort stimmen nicht überein!", "Login Fehlgeschlagen", JOptionPane.WARNING_MESSAGE);
             }
@@ -63,9 +63,9 @@ public class LoginPanel extends DatabasePanel {
         loginButton.addActionListener(login);
         backButton.addActionListener(actionEvent -> back.run());
 
-        JLabel titel = new JLabel(mode == LoginMode.Grosskunde ? "Kunden Login" : "Mitarbeiter Login");
-        titel.setHorizontalAlignment(SwingConstants.CENTER);
-        titel.setFont(titel.getFont().deriveFont(20f));
+        JLabel title = new JLabel(mode == LoginMode.Grosskunde ? "Kunden Login" : "Mitarbeiter Login");
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setFont(title.getFont().deriveFont(20f));
 
         JPanel dataPanel = new JPanel();
         dataPanel.setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -100,7 +100,7 @@ public class LoginPanel extends DatabasePanel {
         enterButton.accept(loginButton);
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(10, 10, 10, 10));
-        add(titel, BorderLayout.NORTH);
+        add(title, BorderLayout.NORTH);
         add(dataBorder, BorderLayout.CENTER);
         add(buttonBorder, BorderLayout.SOUTH);
     }

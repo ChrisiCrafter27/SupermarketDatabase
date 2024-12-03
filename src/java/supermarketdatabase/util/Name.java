@@ -9,4 +9,9 @@ public record Name(String firstname, Optional<String> lastname) {
     public Name(String name) {
         this(name, Optional.empty());
     }
+
+    @Override
+    public String toString() {
+        return lastname.map(string -> firstname + " " + string).orElse(firstname);
+    }
 }

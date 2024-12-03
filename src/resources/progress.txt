@@ -1,0 +1,17 @@
+DONE
+CustomerOrderPanel
+CustomerOrdersPanel
+CustomerOverviewPanel
+CustomerPanel
+CustomerRegisterPanel
+EnterCustomerDataPanel
+GoodsPanel
+LoginPanel
+StaffGoodsPanel
+Adminpanel
+StaffPanel
+AdminStaffPanel
+StaffRegisterPanel
+
+TODO
+RacksPanel

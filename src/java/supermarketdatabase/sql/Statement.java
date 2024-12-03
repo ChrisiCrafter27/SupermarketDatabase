@@ -1,5 +1,6 @@
 package supermarketdatabase.sql;
 
+import java.util.Arrays;
 import java.util.function.Function;
 
 public class Statement<R> {
@@ -12,6 +13,12 @@ public class Statement<R> {
     }
 
     public R execute(MyDatabaseConnector databaseConnector) {
-        return returnValueMapper.apply(databaseConnector.execute(statement));
+        MyQueryResult result = databaseConnector.execute(statement);
+        if(result.succeeded()) {
+            System.out.println(statement + " -> " + Arrays.deepToString(result.getRows()));
+        } else {
+            System.err.println(statement + " -> " + result.gerError());
+        }
+        return returnValueMapper.apply(result);
     }
 }

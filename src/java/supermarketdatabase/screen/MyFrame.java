@@ -1,6 +1,7 @@
 package supermarketdatabase.screen;
 
 import supermarketdatabase.sql.MyDatabaseConnector;
+import supermarketdatabase.sql.Statements;
 
 import javax.swing.*;
 import java.awt.*;
@@ -25,12 +26,11 @@ public class MyFrame {
     }
 
     private MainPanel createMainPanel() {
-        return new MainPanel(connector, newConnector -> connector = newConnector, mode -> {
+        return new MainPanel(connector, newConnector -> connector = newConnector, this::setComponent, () -> setComponent(createMainPanel()), mode -> {
             if(connector != null) setComponent(new LoginPanel(connector, mode, frame.getRootPane()::setDefaultButton, () -> setComponent(createMainPanel()), (loginMode, id) -> {
                 switch (loginMode) {
-                    case Grosskunde -> setComponent(new CustomerPanel(connector, id));
-                    case Mitarbeiter -> setComponent(new StaffPanel(connector));
-                    case Admin -> setComponent(new AdminPanel(connector));
+                    case Grosskunde -> setComponent(new CustomerPanel(connector, id, this::setComponent, () -> setComponent(createMainPanel())));
+                    case Mitarbeiter -> setComponent(new StaffPanel(connector, id, this::setComponent, () -> setComponent(createMainPanel())));
                 }
             }));
         });

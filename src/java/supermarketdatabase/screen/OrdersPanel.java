@@ -3,6 +3,7 @@ package supermarketdatabase.screen;
 import supermarketdatabase.sql.MyDatabaseConnector;
 import supermarketdatabase.sql.Statements;
 import supermarketdatabase.util.GoodRef;
+import supermarketdatabase.util.NameRef;
 import supermarketdatabase.util.Order;
 
 import javax.swing.*;
@@ -13,11 +14,11 @@ import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
-public class CustomerOrdersPanel extends DatabasePanel {
-    public CustomerOrdersPanel(MyDatabaseConnector connector, int id) {
+public class OrdersPanel extends DatabasePanel {
+    public OrdersPanel(MyDatabaseConnector connector) {
         super(connector);
 
-        List<Order> orders = execute(Statements.orders(id));
+        List<Order> orders = execute(Statements.orders());
 
         JLabel title = new JLabel("Bestellungen");
         title.setHorizontalAlignment(SwingConstants.CENTER);
@@ -43,7 +44,7 @@ public class CustomerOrdersPanel extends DatabasePanel {
     private static class OrderTableModel extends AbstractTableModel {
         private final List<Order> orders;
         private final String[] columnNames = {"ID", "Ware", "Anzahl", "Bestelldatum", "Abholdatum", "Gesamtpreis"};
-        private final Class<?>[] columnClasses = {Integer.class, GoodRef.class, Integer.class, LocalDate.class, LocalDate.class, Double.class};
+        private final Class<?>[] columnClasses = {Integer.class, NameRef.class, GoodRef.class, Integer.class, LocalDate.class, LocalDate.class, Double.class};
 
         public OrderTableModel(List<Order> orders) {
             this.orders = new ArrayList<>(orders);
@@ -74,11 +75,12 @@ public class CustomerOrdersPanel extends DatabasePanel {
             Order order = orders.get(rowIndex);
             return switch (columnIndex) {
                 case 0 -> order.id();
-                case 1 -> order.good();
-                case 2 -> order.amount();
-                case 3 -> order.orderDate();
-                case 4 -> order.pickupDate();
-                case 5 -> order.price();
+                case 1 -> order.customer();
+                case 2 -> order.good();
+                case 3 -> order.amount();
+                case 4 -> order.orderDate();
+                case 5 -> order.pickupDate();
+                case 6 -> order.price();
                 default -> null;
             };
         }
