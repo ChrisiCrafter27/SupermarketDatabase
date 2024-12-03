@@ -166,4 +166,21 @@ public class Statements {
                 INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort)
                 VALUES ("%s", "%s", "%s", "%s", "%s", "%s", "%s", "%s", %s, "%s");""", staffData.name().firstname(), staffData.name().lastname().orElseThrow(), staffData.birthday().unformatted(), staffData.city(), staffData.street(), staffData.weeklyHours(), staffData.salary(), staffData.taskType(), staffData.supervisorId() == 0 ? "NULL" : staffData.supervisorId(), password.hashCode()), MyQueryResult::succeeded);
     }
+
+
+    public static Statement<Optional<Integer>> rackId(int x, int y) {
+        return new Statement<>(String.format("""
+                SELECT "Regal-ID"
+                FROM Regal
+                WHERE Spalte = "%s" AND Reihe = "%s";""", x, y), result -> result.succeeded() && result.getRows().length == 1 && result.getRows()[0].length == 1 ? Optional.of(Integer.parseInt(result.getRows()[0][0])) : Optional.empty());
+    }
+
+    public static Statement<List<GoodInRack>> goodsInRack(int id) {
+        return new Statement<>(String.format("""
+                SELECT "Enthält-ID", Menge, Ware."Waren-ID", Name, Preis, Bestand, Temperatur, Platzbedarf
+                FROM "enthält"
+                INNER JOIN Ware
+                ON Ware."Waren-ID" = "enthält"."Waren-ID"
+                WHERE "enthält"."Regal-ID" = "%s";""", id), result -> result.succeeded() ? Arrays.stream(result.getRows()).map(array -> new GoodInRack(Integer.parseInt(array[0]), Integer.parseInt(array[1]), new GoodRef(Integer.parseInt(array[2]), array[3]), new Price(Double.parseDouble(array[4])), Integer.parseInt(array[5]), Temperature.of(array[6]), Integer.parseInt(array[7]))).toList() : List.of());
+    }
 }

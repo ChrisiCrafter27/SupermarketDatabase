@@ -11,7 +11,7 @@ public class StaffPanel extends DatabaseTabbedPane {
 
         addTab("Übersicht", new StaffOverviewPanel(connector, id, resetPanel, setPanel, () -> setPanel.accept(new StaffPanel(connector, id, setPanel, resetPanel))));
         addTab("Bestellungen", new OrdersPanel(connector));
-        addTab("Regale", new RacksPanel(connector));
+        addTab("Regale", new RacksPanel(connector, setPanel, () -> setPanel.accept(new StaffPanel(connector, id, setPanel, resetPanel))));
         addTab("Waren", new GoodsPanel(connector, true, setPanel, () -> setPanel.accept(new StaffPanel(connector, id, setPanel, resetPanel))));
         addTab("Mitarbeiter", new AdminStaffPanel(connector, id == 1, setPanel, () -> setPanel.accept(new StaffPanel(connector, id, setPanel, resetPanel))));
     }
