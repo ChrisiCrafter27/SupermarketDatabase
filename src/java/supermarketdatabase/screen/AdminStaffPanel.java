@@ -69,39 +69,33 @@ public class AdminStaffPanel extends DatabasePanel {
                 }
             }
         }));
-        edit.addActionListener((actionEvent -> {
-            setPanel.accept(new EnterStaffDataPanel(staffs.get(table.getSelectedRow()), "Mitarbeiter bearbeiten", "Abbrechen", "Bestätigen", false, refresh, (staffData, password) -> {
-                boolean success = execute(Statements.updateStaff(staffs.get(table.getSelectedRow()).id(), staffData));
-                if(success) {
-                    JOptionPane.showMessageDialog(this, "Die Daten wurden erfolgreich angepasst!", "Daten angepasst", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Beim Anpassen der Daten ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Anpassen fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
-                }
-                refresh.run();
-            }));
-        }));
-        editPassword.addActionListener((actionEvent -> {
-            setPanel.accept(new EnterStaffPasswordPanel("Passwort ändern", "Abbrechen", "Bestätigen", refresh, password -> {
-                boolean success = execute(Statements.updateStaffPasswort(staffs.get(table.getSelectedRow()).id(), password));
-                if(success) {
-                    JOptionPane.showMessageDialog(this, "Das Passwort wurde erfolgreich geändert!", "Passwort geändert", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Beim Ändern des Passworts ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Ändern fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
-                }
-                refresh.run();
-            }));
-        }));
-        create.addActionListener((actionEvent -> {
-            setPanel.accept(new EnterStaffDataPanel(null, "Neuer Mitarbeiter", "Abbrechen", "Bestätigen", true, refresh, (staffData, password) -> {
-                boolean success = execute(Statements.registerStaff(staffData, password));
-                if(success) {
-                    JOptionPane.showMessageDialog(this, "Der Mitarbeiter wurde erfolgreich erstellt!", "Mitarbeiter erstellt", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Beim Erstellen des Mitarbeiters ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Erstellen fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
-                }
-                refresh.run();
-            }));
-        }));
+        edit.addActionListener((actionEvent -> setPanel.accept(new EnterStaffDataPanel(staffs.get(table.getSelectedRow()), "Mitarbeiter bearbeiten", "Abbrechen", "Bestätigen", false, refresh, (staffData, password) -> {
+            boolean success = execute(Statements.updateStaff(staffs.get(table.getSelectedRow()).id(), staffData));
+            if(success) {
+                JOptionPane.showMessageDialog(this, "Die Daten wurden erfolgreich angepasst!", "Daten angepasst", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Beim Anpassen der Daten ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Anpassen fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
+            }
+            refresh.run();
+        }))));
+        editPassword.addActionListener((actionEvent -> setPanel.accept(new EnterStaffPasswordPanel("Passwort ändern", "Abbrechen", "Bestätigen", refresh, password -> {
+            boolean success = execute(Statements.updateStaffPasswort(staffs.get(table.getSelectedRow()).id(), password));
+            if(success) {
+                JOptionPane.showMessageDialog(this, "Das Passwort wurde erfolgreich geändert!", "Passwort geändert", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Beim Ändern des Passworts ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Ändern fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
+            }
+            refresh.run();
+        }))));
+        create.addActionListener((actionEvent -> setPanel.accept(new EnterStaffDataPanel(null, "Neuer Mitarbeiter", "Abbrechen", "Bestätigen", true, refresh, (staffData, password) -> {
+            boolean success = execute(Statements.registerStaff(staffData, password));
+            if(success) {
+                JOptionPane.showMessageDialog(this, "Der Mitarbeiter wurde erfolgreich erstellt!", "Mitarbeiter erstellt", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Beim Erstellen des Mitarbeiters ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Erstellen fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
+            }
+            refresh.run();
+        }))));
 
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(10, 10, 10, 10));
@@ -150,7 +144,7 @@ public class AdminStaffPanel extends DatabasePanel {
                 case 4 -> staff.weeklyHours();
                 case 5 -> new Price(staff.salary());
                 case 6 -> staff.taskType();
-                case 7 -> staff.supervisorId() == -1 ? null : new NameRef(staff.supervisorId(), staff.supervisorName());
+                case 7 -> staff.supervisorId() == 0 ? null : new NameRef(staff.supervisorId(), staff.supervisorName());
                 default -> null;
             };
         }

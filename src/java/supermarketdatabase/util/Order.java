@@ -1,3 +1,3 @@
 package supermarketdatabase.util;
 
-public record Order(int id, NameRef customer, GoodRef good, int amount, FormattedDate orderDate, FormattedDate pickupDate, double price) {}
+public record Order(int id, NameRef customer, GoodRef good, int amount, FormattedDate orderDate, FormattedDate pickupDate, Price price) {}

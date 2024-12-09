@@ -1,7 +1,6 @@
 package supermarketdatabase.screen;
 
 import supermarketdatabase.util.MyDocumentListener;
-import supermarketdatabase.util.StaffData;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;

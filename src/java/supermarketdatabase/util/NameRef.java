@@ -8,6 +8,6 @@ public record NameRef(int id, Name name) implements Comparable<NameRef> {
 
     @Override
     public String toString() {
-        return name().toString() + " (ID:" + id() + ")";
+        return name().toString() + " (ID: " + id() + ")";
     }
 }

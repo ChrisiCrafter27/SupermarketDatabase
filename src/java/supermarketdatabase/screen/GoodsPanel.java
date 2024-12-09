@@ -67,28 +67,24 @@ public class GoodsPanel extends DatabasePanel {
                 }
             }
         }));
-        edit.addActionListener((actionEvent -> {
-            setPanel.accept(new EditGoodInputPanel(goods.get(table.getSelectedRow()).editable(), "", "", "", refresh, editableGoodData -> {
-                boolean success = execute(Statements.updateGoodNameAndPrice(goods.get(table.getSelectedRow()).id(), editableGoodData));
-                if(success) {
-                    JOptionPane.showMessageDialog(this, "Die Daten wurden erfolgreich angepasst!", "Daten angepasst", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Beim Anpassen der Daten ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Anpassen fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
-                }
-                refresh.run();
-            }));
-        }));
-        create.addActionListener((actionEvent -> {
-            setPanel.accept(new CreateGoodInputPanel("Neue Ware", "Abbrechen", "Bestätigen", refresh, simpleGoodData -> {
-                boolean success = execute(Statements.createGood(simpleGoodData));
-                if(success) {
-                    JOptionPane.showMessageDialog(this, "Die Ware wurde erfolgreich erstellt!", "Ware erstellt", JOptionPane.INFORMATION_MESSAGE);
-                } else {
-                    JOptionPane.showMessageDialog(this, "Beim Erstellen der Ware ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Erstellen fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
-                }
-                refresh.run();
-            }));
-        }));
+        edit.addActionListener((actionEvent -> setPanel.accept(new EditGoodInputPanel(goods.get(table.getSelectedRow()).editable(), "Ware ändern", "Abbrechen", "Bestätigen", refresh, editableGoodData -> {
+            boolean success = execute(Statements.updateGoodNameAndPrice(goods.get(table.getSelectedRow()).id(), editableGoodData));
+            if(success) {
+                JOptionPane.showMessageDialog(this, "Die Ware wurde erfolgreich angepasst!", "Ware angepasst", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Beim Anpassen der Ware ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Anpassen fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
+            }
+            refresh.run();
+        }))));
+        create.addActionListener((actionEvent -> setPanel.accept(new CreateGoodInputPanel("Neue Ware", "Abbrechen", "Bestätigen", refresh, simpleGoodData -> {
+            boolean success = execute(Statements.createGood(simpleGoodData));
+            if(success) {
+                JOptionPane.showMessageDialog(this, "Die Ware wurde erfolgreich erstellt!", "Ware erstellt", JOptionPane.INFORMATION_MESSAGE);
+            } else {
+                JOptionPane.showMessageDialog(this, "Beim Erstellen der Ware ist ein Fehler aufgetreten.\nBitte versuchen sie es erneut.", "Erstellen fehlgeschlagen", JOptionPane.ERROR_MESSAGE);
+            }
+            refresh.run();
+        }))));
 
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(10, 10, 10, 10));

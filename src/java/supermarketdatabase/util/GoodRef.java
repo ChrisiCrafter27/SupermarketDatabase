@@ -8,6 +8,6 @@ public record GoodRef(int id, String name) implements Comparable<GoodRef> {
 
     @Override
     public String toString() {
-        return name() + " (ID:" + id() + ")";
+        return name() + " (ID: " + id() + ")";
     }
 }

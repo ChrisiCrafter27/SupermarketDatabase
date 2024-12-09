@@ -1,44 +1,80 @@
 -- Alte Daten löschen
 DELETE FROM Regal;
 DELETE FROM Ware;
-DELETE FROM Großkunde;
-DELETE FROM enthält;
+DELETE FROM "Großkunde";
+DELETE FROM "enthält";
 DELETE FROM Mitarbeiter;
 DELETE FROM bestellt;
+DELETE FROM sqlite_sequence;
+
+-- Großkunde
+INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Globus Handels GmbH', 'Bonn', 'Kirchstraße 16', '2012-06-20', 1281629899);
+INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Nova Industriebedarf AG', 'Düsseldorf', 'Hauptstraße 159', '2023-08-30', 1281629899);
+INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Phoenix Food Supplies KG', 'Leverkusen', 'Kirchstraße 197', '2005-03-28', 1281629899);
+INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Urban Logistics Solutions GmbH', 'Aachen', 'Kirchstraße 3', '2016-04-21', 1281629899);
+INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Visionary Technologies GmbH', 'Bonn', 'Mühlenweg 138', '2018-08-02', 1281629899);
 
 -- Mitarbeiter
-INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Dieter', 'Schulz', '1980-01-29', 'Aachen', 'Straße 4', 45, 4000, 'Management', NULL, 1281629899);
-INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Anna', 'Müller', '1990-04-15', 'Köln', 'Gasse 1', 40, 3500, 'Management', 1, 1281629899);
-INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Bernd', 'Schmidt', '1985-09-22', 'Bonn', 'Allee 2', 38, 3200, 'Fleischtheke', 2, 1281629899);
-INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Carla', 'Meier', '1995-06-11', 'Düsseldorf', 'Straße 3', 30, 2800, 'Marketing', 1, 1281629899);
-INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Eva', 'Hoffmann', '1998-03-05', 'Leverkusen', 'Platz 5', 20, 2500, 'Putzkraft', 2, 1281629899);
+INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Sophie', 'Schneider', '1990-01-29', 'Bonn', 'Hauptstraße 55', 37, 2190, 'Management', NULL, 1281629899);
+INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Anna', 'Müller', '1971-01-12', 'Leverkusen', 'Schulstraße 63', 29, 3988, 'Marketing', 1, 1281629899);
+INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Max', 'Müller', '1971-04-27', 'Köln', 'Mühlenweg 42', 38, 3450, 'Kasse', 1, 1281629899);
+INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Sophie', 'Becker', '1971-06-23', 'Köln', 'Mühlenweg 124', 29, 4871, 'Kasse', 1, 1281629899);
+INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Julia', 'Schmidt', '2000-07-13', 'Düsseldorf', 'Mühlenweg 186', 34, 3136, 'Kasse', 1, 1281629899);
+INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Max', 'Becker', '1971-02-18', 'Aachen', 'Kirchstraße 51', 39, 4337, 'Putzkraft', 1, 1281629899);
+INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Max', 'Weber', '1994-01-08', 'Köln', 'Kirchstraße 93', 31, 2482, 'Regale', 1, 1281629899);
+INSERT INTO Mitarbeiter (Vorname, Nachname, Geburtsdatum, Ort, Straße, Wochenstunden, Gehalt, Aufgabenbereich, Vorgesetzter, Passwort) VALUES ('Lukas', 'Schmidt', '2000-05-06', 'Bonn', 'Schulstraße 148', 37, 3628, 'Frischtheke', 1, 1281629899);
 
--- Großkunden
-INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Kunde A', 'Köln', 'Allee 1', '2022-05-15', 1281629899);
-INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Kunde B', 'Bonn', 'Straße 2', '2021-11-23', 1281629899);
-INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Kunde C', 'Düsseldorf', 'Gasse 3', '2023-03-08', 1281629899);
-INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Kunde D', 'Aachen', 'Straße 4', '2020-07-19', 1281629899);
-INSERT INTO Großkunde (Name, Ort, Straße, Registrierungsdatum, Passwort) VALUES ('Kunde E', 'Leverkusen', 'Platz 5', '2021-02-12', 1281629899);
+-- Ware
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Apfel', 0.5, 100, 'Normal', 1);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Milch', 0.8, 50, 'Gekühlt', 2);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Brot', 1.2, 300, 'Normal', 3);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Butter', 1.5, 400, 'Gekühlt', 2);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Wurst', 2.0, 200, 'Gekühlt', 3);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Käse', 2.5, 250, 'Gekühlt', 3);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Cola', 1.0, 60, 'Normal', 1);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Wasser', 0.6, 100, 'Normal', 1);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Schokolade', 1.8, 50, 'Normal', 1);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Salat', 1.0, 150, 'Gekühlt', 1);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Kartoffel', 0.3, 200, 'Normal', 1);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Zwiebel', 0.4, 150, 'Normal', 1);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Hähnchen', 3.0, 100, 'Gefroren', 5);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Pizza', 2.5, 200, 'Gefroren', 4);
+INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Eiscreme', 2.0, 150, 'Gefroren', 4);
 
--- Waren
-INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Milch', 1.2, 50, 'Gekühlt', 1);
-INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Eis', 2.5, 20, 'Gefroren', 2);
-INSERT INTO Ware (Name, Preis, Bestand, Platzbedarf) VALUES ('Brot', 0.8, 100, 1);
-INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Butter', 1.8, 30, 'Gekühlt', 1);
-INSERT INTO Ware (Name, Preis, Bestand, Temperatur, Platzbedarf) VALUES ('Pizza', 3.5, 10, 'Gefroren', 3);
-INSERT INTO Ware (Name, Preis, Bestand, Platzbedarf) VALUES ('Apfelsaft', 1.5, 40, 1);
-INSERT INTO Ware (Name, Preis, Bestand, Platzbedarf) VALUES ('Schokolade', 1.0, 70, 1);
-
--- Regale
-INSERT INTO Regal (Reihe, Spalte, Kapazität) VALUES (1, 1, 50);
-INSERT INTO Regal (Reihe, Spalte, Kapazität, Temperatur) VALUES (2, 3, 100, 'Gefroren');
-INSERT INTO Regal (Reihe, Spalte, Kapazität, Temperatur) VALUES (3, 2, 150, 'Gekühlt');
-INSERT INTO Regal (Reihe, Spalte, Kapazität) VALUES (4, 1, 200);
-INSERT INTO Regal (Reihe, Spalte, Kapazität) VALUES (5, 2, 75);
+-- Regal
+INSERT INTO Regal (Reihe, Spalte, Kapazität, Temperatur) VALUES (2, 2, 50, 'Normal');
+INSERT INTO Regal (Reihe, Spalte, Kapazität, Temperatur) VALUES (2, 4, 60, 'Normal');
+INSERT INTO Regal (Reihe, Spalte, Kapazität, Temperatur) VALUES (3, 2, 40, 'Gekühlt');
+INSERT INTO Regal (Reihe, Spalte, Kapazität, Temperatur) VALUES (3, 4, 30, 'Gekühlt');
+INSERT INTO Regal (Reihe, Spalte, Kapazität, Temperatur) VALUES (4, 2, 50, 'Gefroren');
+INSERT INTO Regal (Reihe, Spalte, Kapazität, Temperatur) VALUES (4, 4, 40, 'Gefroren');
 
 -- enthält
-INSERT INTO "enthält" ("Regal-ID", "Waren-ID", "Menge") VALUES (1, 1, 30);
-INSERT INTO "enthält" ("Regal-ID", "Waren-ID", "Menge") VALUES (2, 2, 10);
-INSERT INTO "enthält" ("Regal-ID", "Waren-ID", "Menge") VALUES (3, 3, 50);
-INSERT INTO "enthält" ("Regal-ID", "Waren-ID", "Menge") VALUES (4, 4, 20);
-INSERT INTO "enthält" ("Regal-ID", "Waren-ID", "Menge") VALUES (5, 5, 5);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (1, 10, 6);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (1, 14, 9);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (2, 8, 12);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (2, 13, 12);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (3, 7, 12);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (3, 13, 5);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (3, 4, 11);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (3, 2, 11);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (4, 13, 12);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (4, 15, 9);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (4, 1, 8);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (4, 12, 14);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (5, 15, 5);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (5, 6, 5);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (6, 11, 5);
+INSERT INTO "enthält" ("Regal-ID", "Waren-ID", Menge) VALUES (6, 9, 11);
+
+-- bestellt
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (1, 7, 1, '2022-02-09', '2024-07-11', 1.0);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (2, 9, 2, '2021-05-19', '2024-05-09', 3.6);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (2, 13, 4, '2023-10-22', '2024-11-07', 12.0);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (2, 7, 5, '2023-09-08', '2023-03-15', 5.0);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (3, 2, 3, '2023-07-31', '2024-12-11', 2.4);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (3, 9, 4, '2022-01-11', '2024-10-26', 7.2);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (4, 5, 3, '2022-05-07', '2024-10-06', 6.0);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (5, 10, 1, '2021-12-02', '2024-06-26', 1.0);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (5, 7, 4, '2022-08-28', '2023-09-26', 4.0);
+INSERT INTO bestellt ("Kunden-ID", "Waren-ID", Menge, Bestelldatum, Abholdatum, Gesamtpreis) VALUES (5, 15, 3, '2020-05-06', '2024-04-29', 6.0);

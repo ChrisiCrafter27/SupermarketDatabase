@@ -9,7 +9,6 @@ import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
 import java.text.DecimalFormat;
-import java.util.function.BiConsumer;
 import java.util.function.Consumer;
 
 public class EditGoodInputPanel extends JPanel {

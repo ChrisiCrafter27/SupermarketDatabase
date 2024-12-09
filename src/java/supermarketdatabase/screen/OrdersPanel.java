@@ -5,6 +5,7 @@ import supermarketdatabase.sql.Statements;
 import supermarketdatabase.util.GoodRef;
 import supermarketdatabase.util.NameRef;
 import supermarketdatabase.util.Order;
+import supermarketdatabase.util.Price;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -43,8 +44,8 @@ public class OrdersPanel extends DatabasePanel {
 
     private static class OrderTableModel extends AbstractTableModel {
         private final List<Order> orders;
-        private final String[] columnNames = {"ID", "Ware", "Anzahl", "Bestelldatum", "Abholdatum", "Gesamtpreis"};
-        private final Class<?>[] columnClasses = {Integer.class, NameRef.class, GoodRef.class, Integer.class, LocalDate.class, LocalDate.class, Double.class};
+        private final String[] columnNames = {"ID", "Kunde", "Ware", "Anzahl", "Bestelldatum", "Abholdatum", "Gesamtpreis"};
+        private final Class<?>[] columnClasses = {Integer.class, NameRef.class, GoodRef.class, Integer.class, LocalDate.class, LocalDate.class, Price.class};
 
         public OrderTableModel(List<Order> orders) {
             this.orders = new ArrayList<>(orders);

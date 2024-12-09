@@ -1,7 +1,9 @@
 package supermarketdatabase.util;
 
 import java.time.LocalDate;
+import java.time.ZoneOffset;
 import java.time.format.DateTimeFormatter;
+import java.util.Date;
 
 public class FormattedDate implements Comparable<FormattedDate> {
     public static final DateTimeFormatter FORMATTER = DateTimeFormatter.ofPattern("dd.MM.yyyy");
@@ -34,5 +36,9 @@ public class FormattedDate implements Comparable<FormattedDate> {
 
     public static FormattedDate parseFormatted(String date) {
         return new FormattedDate(LocalDate.parse(date, FORMATTER), FORMATTER);
+    }
+
+    public Date toDate() {
+        return Date.from(parent.atStartOfDay().toInstant(ZoneOffset.UTC));
     }
 }

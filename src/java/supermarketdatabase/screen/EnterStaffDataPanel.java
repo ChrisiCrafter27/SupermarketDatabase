@@ -8,25 +8,18 @@ import javax.swing.text.DateFormatter;
 import javax.swing.text.DefaultFormatterFactory;
 import javax.swing.text.NumberFormatter;
 import java.awt.*;
-import java.text.DateFormat;
-import java.text.DecimalFormat;
 import java.text.NumberFormat;
 import java.text.SimpleDateFormat;
 import java.time.Instant;
-import java.time.LocalDate;
-import java.time.format.DateTimeFormatter;
-import java.time.format.DateTimeFormatterBuilder;
-import java.util.Arrays;
 import java.util.Date;
 import java.util.function.BiConsumer;
-import java.util.function.Consumer;
 
 public class EnterStaffDataPanel extends JPanel {
     public EnterStaffDataPanel(StaffData base, String titleString, String abortButtonName, String continueButtonName, boolean password, Runnable onAbort, BiConsumer<StaffData, String> onContinue) {
         JTextField name0 = new JTextField(base != null ? base.name().firstname() : "");
         JTextField name1 = new JTextField(base != null ? base.name().lastname().orElseThrow() : "");
         JFormattedTextField birthday = new JFormattedTextField(new DefaultFormatterFactory(new DateFormatter(new SimpleDateFormat("dd.MM.yyyy"))));
-        birthday.setValue(base != null ? base.birthday().toString() : Date.from(Instant.now()));
+        birthday.setValue(base != null ? base.birthday().toDate() : Date.from(Instant.now()));
         JTextField city = new JTextField(base != null ? base.city() : "");
         JTextField street = new JTextField(base != null ? base.street() : "");
         JSpinner weeklyHours = new JSpinner(new SpinnerNumberModel(base != null ? base.weeklyHours() : 0, 0, null, 1));
@@ -62,12 +55,10 @@ public class EnterStaffDataPanel extends JPanel {
         textPanel.add(taskType);
         textPanel.add(new JLabel("Vorgesetzter:"));
         textPanel.add(supervisor);
-        if(password) {
-            textPanel.add(new JLabel("Passwort:"));
-            textPanel.add(password0);
-            textPanel.add(new JLabel("Passwort wiederholen:"));
-            textPanel.add(password1);
-        }
+        textPanel.add(new JLabel("Passwort:"));
+        textPanel.add(password0);
+        textPanel.add(new JLabel("Passwort wiederholen:"));
+        textPanel.add(password1);
 
         JButton aboutButton = new JButton(abortButtonName);
         aboutButton.addActionListener(actionEvent -> onAbort.run());
@@ -79,10 +70,10 @@ public class EnterStaffDataPanel extends JPanel {
         buttonPanel.add(continueButton);
         buttonPanel.add(aboutButton);
 
-        MyDocumentListener documentListener = () -> continueButton.setEnabled(!password0.getText().isEmpty() && password0.getText().equals(String.valueOf(password1.getPassword())));
+        MyDocumentListener documentListener = () -> continueButton.setEnabled((!password && password0.getText().isEmpty() && password1.getPassword().length == 0) || (!password0.getText().isEmpty() && password0.getText().equals(String.valueOf(password1.getPassword()))));
         password0.getDocument().addDocumentListener(documentListener);
         password1.getDocument().addDocumentListener(documentListener);
-        continueButton.setEnabled(!password0.getText().isEmpty());
+        continueButton.setEnabled((!password && password0.getText().isEmpty() && password1.getPassword().length == 0) || (!password0.getText().isEmpty() && password0.getText().equals(String.valueOf(password1.getPassword()))));
 
         setLayout(new BorderLayout());
         setBorder(new EmptyBorder(10, 10, 10, 10));

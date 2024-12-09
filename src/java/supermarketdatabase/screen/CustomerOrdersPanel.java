@@ -4,6 +4,7 @@ import supermarketdatabase.sql.MyDatabaseConnector;
 import supermarketdatabase.sql.Statements;
 import supermarketdatabase.util.GoodRef;
 import supermarketdatabase.util.Order;
+import supermarketdatabase.util.Price;
 
 import javax.swing.*;
 import javax.swing.border.EmptyBorder;
@@ -42,8 +43,8 @@ public class CustomerOrdersPanel extends DatabasePanel {
 
     private static class OrderTableModel extends AbstractTableModel {
         private final List<Order> orders;
-        private final String[] columnNames = {"ID", "Ware", "Anzahl", "Bestelldatum", "Abholdatum", "Gesamtpreis"};
-        private final Class<?>[] columnClasses = {Integer.class, GoodRef.class, Integer.class, LocalDate.class, LocalDate.class, Double.class};
+        private final String[] columnNames = {"Ware", "Anzahl", "Bestelldatum", "Abholdatum", "Gesamtpreis"};
+        private final Class<?>[] columnClasses = {GoodRef.class, Integer.class, LocalDate.class, LocalDate.class, Price.class};
 
         public OrderTableModel(List<Order> orders) {
             this.orders = new ArrayList<>(orders);
@@ -73,12 +74,11 @@ public class CustomerOrdersPanel extends DatabasePanel {
         public Object getValueAt(int rowIndex, int columnIndex) {
             Order order = orders.get(rowIndex);
             return switch (columnIndex) {
-                case 0 -> order.id();
-                case 1 -> order.good();
-                case 2 -> order.amount();
-                case 3 -> order.orderDate();
-                case 4 -> order.pickupDate();
-                case 5 -> order.price();
+                case 0 -> order.good();
+                case 1 -> order.amount();
+                case 2 -> order.orderDate();
+                case 3 -> order.pickupDate();
+                case 4 -> order.price();
                 default -> null;
             };
         }

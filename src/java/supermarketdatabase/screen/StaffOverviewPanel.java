@@ -2,7 +2,6 @@ package supermarketdatabase.screen;
 
 import supermarketdatabase.sql.MyDatabaseConnector;
 import supermarketdatabase.sql.Statements;
-import supermarketdatabase.util.FormattedDate;
 import supermarketdatabase.util.StaffData;
 
 import javax.swing.*;
@@ -12,7 +11,7 @@ import java.awt.*;
 import java.util.function.Consumer;
 
 public class StaffOverviewPanel extends DatabasePanel {
-    public StaffOverviewPanel(MyDatabaseConnector connector, int id, Runnable reset, Consumer<JComponent> setPanel, Runnable refresh) {
+    public StaffOverviewPanel(MyDatabaseConnector connector, int id, Consumer<JComponent> setPanel, Runnable refresh) {
         super(connector);
 
         StaffData staffData = execute(Statements.staffData(id)).orElseThrow();
@@ -48,7 +47,7 @@ public class StaffOverviewPanel extends DatabasePanel {
         dataPanel.add(new JLabel(staffData.salary() + "€"));
         dataPanel.add(new JLabel("Aufgabenbereich:"));
         dataPanel.add(new JLabel(staffData.taskType()));
-        if(staffData.supervisorId() != -1) {
+        if(staffData.supervisorId() != 0) {
             dataPanel.add(new JLabel("Vorgesetzter:"));
             dataPanel.add(new JLabel(staffData.supervisorName().toString() + " (" + staffData.supervisorId() + ")"));
         }

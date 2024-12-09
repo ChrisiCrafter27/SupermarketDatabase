@@ -18,7 +18,10 @@ public class MyFrame {
         frame.setMinimumSize(new Dimension(400, 200));
 
         Path path = Path.of("src/resources/supermarkt.db");
-        if(Files.exists(path)) connector = new MyDatabaseConnector(path);
+        if(Files.exists(path)) {
+            connector = new MyDatabaseConnector(path);
+            Statements.enableForeignKeys().execute(connector);
+        }
         setComponent(createMainPanel());
 
         frame.setVisible(true);
@@ -26,7 +29,11 @@ public class MyFrame {
     }
 
     private MainPanel createMainPanel() {
-        return new MainPanel(connector, newConnector -> connector = newConnector, this::setComponent, () -> setComponent(createMainPanel()), mode -> {
+        return new MainPanel(connector, newConnector -> {
+            if(Statements.enableForeignKeys().execute(newConnector)) {
+                connector = newConnector;
+            }
+        }, this::setComponent, () -> setComponent(createMainPanel()), mode -> {
             if(connector != null) setComponent(new LoginPanel(connector, mode, frame.getRootPane()::setDefaultButton, () -> setComponent(createMainPanel()), (loginMode, id) -> {
                 switch (loginMode) {
                     case Grosskunde -> setComponent(new CustomerPanel(connector, id, this::setComponent, () -> setComponent(createMainPanel())));

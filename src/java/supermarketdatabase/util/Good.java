@@ -4,4 +4,9 @@ public record Good(int id, String name, Price price, int stock, Temperature temp
     public EditableGoodData editable() {
         return new EditableGoodData(name, price, stock);
     }
+
+    @Override
+    public String toString() {
+        return name() + " (ID: " + id() + ")";
+    }
 }

@@ -1,4 +1,4 @@
 package supermarketdatabase.util;
 
-public record GoodInRack(int id, int amount, GoodRef ref, Price price, int stock, Temperature temperature, double requiredSpace) {}
+public record GoodInRack(int id, GoodRef ref, int amount, double requiredSpace) {}
 

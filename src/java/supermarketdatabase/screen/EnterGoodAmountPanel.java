@@ -6,8 +6,8 @@ import java.awt.*;
 import java.util.function.Consumer;
 
 public class EnterGoodAmountPanel extends JPanel {
-    public EnterGoodAmountPanel(int base, String titleString, String abortButtonName, String continueButtonName, Runnable onAbort, Consumer<Integer> onContinue) {
-        JSpinner amount = new JSpinner(new SpinnerNumberModel(base, 1, null, 1));
+    public EnterGoodAmountPanel(int max, String titleString, String abortButtonName, String continueButtonName, Runnable onAbort, Consumer<Integer> onContinue) {
+        JSpinner amount = new JSpinner(new SpinnerNumberModel(1, 1, max, 1));
 
         JLabel title = new JLabel(titleString);
         title.setHorizontalAlignment(SwingConstants.CENTER);

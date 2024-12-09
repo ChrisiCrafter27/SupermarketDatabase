@@ -19,18 +19,6 @@ public class MyQueryResult {
         return error;
     }
 
-    public int rows() {
-        return queryResult != null ? queryResult.getRowCount() : 0;
-    }
-
-    public int columns() {
-        return queryResult != null ? queryResult.getColumnCount() : 0;
-    }
-
-    public String[] getTitles() {
-        return queryResult != null ? queryResult.getColumnNames() : new String[]{};
-    }
-
     public String[][] getRows() {
         return queryResult != null ? queryResult.getData() : new String[][]{};
     }
