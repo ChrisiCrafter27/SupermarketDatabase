@@ -58,7 +58,7 @@ public class GoodsPanel extends DatabasePanel {
 
         delete.addActionListener((actionEvent -> {
             if(JOptionPane.showConfirmDialog(this, "Ware wirklich unwiderruflich löschen?", "Ware löschen", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
-                boolean success = execute(Statements.deleteGood(goods.get(table.getSelectedRow()).id()));
+                boolean success = execute(Statements.deleteGood(goods.get(table.convertRowIndexToModel(table.getSelectedRow())).id()));
                 if(success) {
                     JOptionPane.showMessageDialog(this, "Die Ware wurde erfolgreich gelöscht!", "Ware gelöscht", JOptionPane.INFORMATION_MESSAGE);
                     refresh.run();
@@ -67,8 +67,8 @@ public class GoodsPanel extends DatabasePanel {
                 }
             }
         }));
-        edit.addActionListener((actionEvent -> setPanel.accept(new EditGoodInputPanel(goods.get(table.getSelectedRow()).editable(), "Ware ändern", "Abbrechen", "Bestätigen", refresh, editableGoodData -> {
-            boolean success = execute(Statements.updateGoodNameAndPrice(goods.get(table.getSelectedRow()).id(), editableGoodData));
+        edit.addActionListener((actionEvent -> setPanel.accept(new EditGoodInputPanel(goods.get(table.convertRowIndexToModel(table.getSelectedRow())).editable(), "Ware ändern", "Abbrechen", "Bestätigen", refresh, editableGoodData -> {
+            boolean success = execute(Statements.updateGoodNameAndPrice(goods.get(table.convertRowIndexToModel(table.getSelectedRow())).id(), editableGoodData));
             if(success) {
                 JOptionPane.showMessageDialog(this, "Die Ware wurde erfolgreich angepasst!", "Ware angepasst", JOptionPane.INFORMATION_MESSAGE);
             } else {

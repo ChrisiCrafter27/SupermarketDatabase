@@ -60,7 +60,7 @@ public class AdminStaffPanel extends DatabasePanel {
 
         delete.addActionListener((actionEvent -> {
             if(JOptionPane.showConfirmDialog(this, "Mitarbeiter wirklich unwiderruflich löschen?", "Mitarbeiter löschen", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
-                boolean success = execute(Statements.deleteStaff(staffs.get(table.getSelectedRow()).id()));
+                boolean success = execute(Statements.deleteStaff(staffs.get(table.convertRowIndexToModel(table.getSelectedRow())).id()));
                 if(success) {
                     JOptionPane.showMessageDialog(this, "Der Mitarbeiter wurde erfolgreich gelöscht!", "Mitarbeiter gelöscht", JOptionPane.INFORMATION_MESSAGE);
                     refresh.run();
@@ -69,8 +69,8 @@ public class AdminStaffPanel extends DatabasePanel {
                 }
             }
         }));
-        edit.addActionListener((actionEvent -> setPanel.accept(new EnterStaffDataPanel(staffs.get(table.getSelectedRow()), "Mitarbeiter bearbeiten", "Abbrechen", "Bestätigen", false, refresh, (staffData, password) -> {
-            boolean success = execute(Statements.updateStaff(staffs.get(table.getSelectedRow()).id(), staffData));
+        edit.addActionListener((actionEvent -> setPanel.accept(new EnterStaffDataPanel(staffs.get(table.convertRowIndexToModel(table.getSelectedRow())), "Mitarbeiter bearbeiten", "Abbrechen", "Bestätigen", false, refresh, (staffData, password) -> {
+            boolean success = execute(Statements.updateStaff(staffs.get(table.convertRowIndexToModel(table.getSelectedRow())).id(), staffData));
             if(success) {
                 JOptionPane.showMessageDialog(this, "Die Daten wurden erfolgreich angepasst!", "Daten angepasst", JOptionPane.INFORMATION_MESSAGE);
             } else {
@@ -79,7 +79,7 @@ public class AdminStaffPanel extends DatabasePanel {
             refresh.run();
         }))));
         editPassword.addActionListener((actionEvent -> setPanel.accept(new EnterStaffPasswordPanel("Passwort ändern", "Abbrechen", "Bestätigen", refresh, password -> {
-            boolean success = execute(Statements.updateStaffPasswort(staffs.get(table.getSelectedRow()).id(), password));
+            boolean success = execute(Statements.updateStaffPasswort(staffs.get(table.convertRowIndexToModel(table.getSelectedRow())).id(), password));
             if(success) {
                 JOptionPane.showMessageDialog(this, "Das Passwort wurde erfolgreich geändert!", "Passwort geändert", JOptionPane.INFORMATION_MESSAGE);
             } else {

@@ -75,7 +75,7 @@ public class RacksPanel extends DatabasePanel {
 
         deleteGood.addActionListener(actionEvent -> {
             if(JOptionPane.showConfirmDialog(this, "Ware wirklich unwiderruflich löschen?", "Ware löschen", JOptionPane.YES_NO_OPTION, JOptionPane.WARNING_MESSAGE) == JOptionPane.YES_OPTION) {
-                boolean success = execute(Statements.deleteGoodInRack(goods.get(table.getSelectedRow()).id()));
+                boolean success = execute(Statements.deleteGoodInRack(goods.get(table.convertRowIndexToModel(table.getSelectedRow())).id()));
                 if(success) {
                     JOptionPane.showMessageDialog(this, "Die Ware wurde erfolgreich gelöscht!", "Ware gelöscht", JOptionPane.INFORMATION_MESSAGE);
                     refresh.run();
@@ -84,8 +84,8 @@ public class RacksPanel extends DatabasePanel {
                 }
             }
         });
-        reduceGood.addActionListener(actionEvent -> setPanel.accept(new EnterGoodAmountPanel(goods.get(table.getSelectedRow()).amount(), "Anzahl reduzieren", "Abbrechen", "Bestätigen", refresh, amount -> {
-            boolean success = execute(Statements.reduceGoodInRack(goods.get(table.getSelectedRow()).id(), amount));
+        reduceGood.addActionListener(actionEvent -> setPanel.accept(new EnterGoodAmountPanel(goods.get(table.convertRowIndexToModel(table.getSelectedRow())).amount(), "Anzahl reduzieren", "Abbrechen", "Bestätigen", refresh, amount -> {
+            boolean success = execute(Statements.reduceGoodInRack(goods.get(table.convertRowIndexToModel(table.getSelectedRow())).id(), amount));
             if(success) {
                 JOptionPane.showMessageDialog(this, "Die Anzahl wurde erfolgreich reduziert!", "Anzahl reduziert", JOptionPane.INFORMATION_MESSAGE);
             } else {

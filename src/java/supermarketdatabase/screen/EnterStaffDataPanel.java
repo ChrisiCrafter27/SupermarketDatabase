@@ -55,10 +55,12 @@ public class EnterStaffDataPanel extends JPanel {
         textPanel.add(taskType);
         textPanel.add(new JLabel("Vorgesetzter:"));
         textPanel.add(supervisor);
-        textPanel.add(new JLabel("Passwort:"));
-        textPanel.add(password0);
-        textPanel.add(new JLabel("Passwort wiederholen:"));
-        textPanel.add(password1);
+        if(password) {
+            textPanel.add(new JLabel("Passwort:"));
+            textPanel.add(password0);
+            textPanel.add(new JLabel("Passwort wiederholen:"));
+            textPanel.add(password1);
+        }
 
         JButton aboutButton = new JButton(abortButtonName);
         aboutButton.addActionListener(actionEvent -> onAbort.run());
